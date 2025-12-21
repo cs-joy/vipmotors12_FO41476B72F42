@@ -1,13 +1,13 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { FormDataType } from "./SurveyForm";
+import { useFormContext } from "react-hook-form";
 
-type Step1Props = {
-  formData: FormDataType;
-  setFormData: React.Dispatch<React.SetStateAction<FormDataType>>;
-};
-
-export default function Step1({ formData, setFormData }: Step1Props) {
+export default function Step1() {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<FormDataType>();
   return (
     <div>
       <p className="text-base md:text-lg font-medium">
@@ -15,22 +15,24 @@ export default function Step1({ formData, setFormData }: Step1Props) {
         questions :
       </p>
 
-      <p className="mt-6 text-lg font-medium mb-3">
-        What&apos;s the new car make and model you&apos;re looking for?
-        <span className="text-Primary-Color">*</span>
-      </p>
+      <div>
+        <p className="mt-6 text-lg font-medium mb-3">
+          What&apos;s the new car make and model you&apos;re looking for?{" "}
+          <span className="text-Primary-Color">*</span>
+        </p>
 
-      <Input
-        className="custom-input"
-        placeholder="Enter your car model"
-        value={formData.carType}
-        onChange={(e) =>
-          setFormData((prev) => ({
-            ...prev,
-            carType: e.target.value,
-          }))
-        }
-      />
+        <Input
+          className="custom-input"
+          placeholder="Enter your car model"
+          {...register("carType", {
+            required: "Car make & model is required",
+          })}
+        />
+
+        {errors.carType && (
+          <p className="error-msg">{errors.carType.message}</p>
+        )}
+      </div>
     </div>
   );
 }

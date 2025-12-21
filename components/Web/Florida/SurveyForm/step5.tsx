@@ -2,14 +2,19 @@ import React from "react";
 import { FormDataType } from "./SurveyForm";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useFormContext } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 
-type Step1Props = {
-  formData: FormDataType;
-  setFormData: React.Dispatch<React.SetStateAction<FormDataType>>;
-};
+export default function Step5() {
+  const {
+    setValue,
+    watch,
+    register,
+    formState: { errors },
+  } = useFormContext<FormDataType>();
 
-export default function Step5({ formData, setFormData }: Step1Props) {
+  const selectedState = watch("state");
+
   const state = [
     {
       label: "miami",
@@ -46,14 +51,12 @@ export default function Step5({ formData, setFormData }: Step1Props) {
 
         <div className="mt-3 flex flex-col gap-4">
           <RadioGroup
-            value={formData.state}
-            onValueChange={(value) =>
-              setFormData((prev) => ({
-                ...prev,
-                state: value,
-                otherState: value === "other" ? prev.otherState : "",
-              }))
-            }
+            value={selectedState}
+            onValueChange={(value) => {
+              setValue("state", value, { shouldValidate: true });
+              if (value !== "Other")
+                setValue("otherState", "", { shouldValidate: true });
+            }}
           >
             {state.map((item, idx) => (
               <div key={idx} className="flex items-center space-x-2">
@@ -72,24 +75,36 @@ export default function Step5({ formData, setFormData }: Step1Props) {
             ))}
           </RadioGroup>
         </div>
+
+        {errors.state && <p className="error-msg">{errors.state.message}</p>}
       </div>
 
-      {formData.state === "Other" && (
+      {/* Hidden State Input */}
+      <input
+        type="hidden"
+        {...register("state", { required: "Select your location" })}
+      />
+
+      {/* Conditional "Other" input */}
+      {selectedState === "Other" && (
         <div className="mt-4">
           <Label className="text-base font-medium">
             Others<span className="text-Primary-Color">*</span>
           </Label>
           <Input
             className="custom-input"
-            placeholder="State name"
-            value={formData.otherState}
-            onChange={(e) =>
-              setFormData((prev) => ({
-                ...prev,
-                otherState: e.target.value,
-              }))
-            }
+            placeholder="location"
+            {...register("otherState", {
+              validate: (value) =>
+                selectedState !== "Other" ||
+                value.trim().length > 0 ||
+                "Please enter your location",
+            })}
           />
+
+          {errors.otherState && (
+            <p className="error-msg">{errors.otherState.message}</p>
+          )}
         </div>
       )}
     </div>

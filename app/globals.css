@@ -139,3 +139,8 @@
 .custom-accent svg {
   @apply fill-Primary-Color! border-0! h-2.5! w-2.5! stroke-transparent!;
 }
+
+/* Error Msg */
+.error-msg {
+  @apply text-sm text-red-500 mt-1;
+}

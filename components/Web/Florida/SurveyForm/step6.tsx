@@ -2,13 +2,13 @@ import React from "react";
 import { FormDataType } from "./SurveyForm";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useFormContext } from "react-hook-form";
 
-type Step1Props = {
-  formData: FormDataType;
-  setFormData: React.Dispatch<React.SetStateAction<FormDataType>>;
-};
-
-export default function Step6({ formData, setFormData }: Step1Props) {
+export default function Step6() {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<FormDataType>();
   return (
     <div>
       <div className="flex flex-col gap-4">
@@ -19,14 +19,14 @@ export default function Step6({ formData, setFormData }: Step1Props) {
           </Label>
           <Input
             className="mt-3 custom-input"
-            value={formData.zipcode}
-            onChange={(e) =>
-              setFormData((prev) => ({
-                ...prev,
-                zipcode: e.target.value,
-              }))
-            }
+            {...register("zipcode", {
+              required: "Zip Code is required",
+            })}
           />
+
+          {errors.zipcode && (
+            <p className="error-msg">{errors.zipcode.message}</p>
+          )}
         </div>
       </div>
     </div>

@@ -2,13 +2,13 @@ import React from "react";
 import { FormDataType } from "./SurveyForm";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useFormContext } from "react-hook-form";
 
-type Step1Props = {
-  formData: FormDataType;
-  setFormData: React.Dispatch<React.SetStateAction<FormDataType>>;
-};
-
-export default function Step4({ formData, setFormData }: Step1Props) {
+export default function Step4() {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<FormDataType>();
   return (
     <div>
       <p className="mt-6 text-lg font-medium mb-3">
@@ -19,53 +19,53 @@ export default function Step4({ formData, setFormData }: Step1Props) {
       <div className="flex flex-col gap-4">
         <div>
           <Label className="text-base font-medium">
-            Full Name<span className="text-Primary-Color">*</span>
+            Full Name <span className="text-Primary-Color">*</span>
           </Label>
           <Input
             className="mt-3 custom-input"
             placeholder="Enter your name"
-            value={formData.fullName}
-            onChange={(e) =>
-              setFormData((prev) => ({
-                ...prev,
-                fullName: e.target.value,
-              }))
-            }
+            {...register("fullName", {
+              required: "Full name is required",
+            })}
           />
+
+          {errors.fullName && (
+            <p className="error-msg">{errors.fullName.message}</p>
+          )}
         </div>
 
         <div>
           <Label className="text-base font-medium">
-            Email Address<span className="text-Primary-Color">*</span>
+            Email Address <span className="text-Primary-Color">*</span>
           </Label>
           <Input
             className="mt-3 custom-input"
             placeholder="Enter your email"
-            value={formData.email}
-            onChange={(e) =>
-              setFormData((prev) => ({
-                ...prev,
-                email: e.target.value,
-              }))
-            }
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // basic email regex
+                message: "Please enter a valid email address",
+              },
+            })}
           />
+          {errors.email && <p className="error-msg">{errors.email.message}</p>}
         </div>
 
         <div>
           <Label className="text-base font-medium">
-            Phone Number<span className="text-Primary-Color">*</span>
+            Phone Number <span className="text-Primary-Color">*</span>
           </Label>
           <Input
             className="mt-3 custom-input"
             placeholder="Enter your number"
-            value={formData.phoneNumber}
-            onChange={(e) =>
-              setFormData((prev) => ({
-                ...prev,
-                phoneNumber: e.target.value,
-              }))
-            }
+            {...register("phoneNumber", {
+              required: "Phone number is required",
+            })}
           />
+          {errors.phoneNumber && (
+            <p className="error-msg">{errors.phoneNumber.message}</p>
+          )}
         </div>
       </div>
     </div>
