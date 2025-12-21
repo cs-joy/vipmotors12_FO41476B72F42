@@ -52,6 +52,10 @@
   @apply max-w-[1360px] w-full mx-auto px-4;
 }
 
+.custom-container-2 {
+  @apply max-w-[1600px] w-full mx-auto px-4;
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -143,4 +147,18 @@
 /* Error Msg */
 .error-msg {
   @apply text-sm text-red-500 mt-1;
+}
+
+/* Custom Swiper JS bullet */
+
+.swiper-pagination {
+  @apply absolute bottom-10!;
+}
+
+.swiper-pagination-bullet {
+  @apply w-3! h-3! bg-white! opacity-[1]! rounded-full!;
+}
+
+.swiper-pagination-bullet-active {
+  @apply bg-Primary-Color! w-9! rounded-xl!;
 }
