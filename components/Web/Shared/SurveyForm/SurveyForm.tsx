@@ -12,6 +12,7 @@ import Step3 from "./step3";
 import Step4 from "./step4";
 import Step5 from "./step5";
 import Step6 from "./step6";
+import { usePathname, useRouter } from "next/navigation";
 
 const steps: {
   title: string;
@@ -44,6 +45,10 @@ export type FormDataType = {
 };
 
 export default function SurveyForm() {
+  const [disableButton, setDisableButton] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+
   const methods = useForm<FormDataType>({
     defaultValues: {
       carType: "",
@@ -77,6 +82,7 @@ export default function SurveyForm() {
 
   // Form Submission
   const onSubmit = async (data: FormDataType) => {
+    setDisableButton(true);
     try {
       // console.log("Submitting:", data);
 
@@ -115,6 +121,12 @@ export default function SurveyForm() {
           text: "Thank you for taking the time to complete our survey!",
           icon: "success",
           confirmButtonText: "Ok",
+        }).then(() => {
+          if (pathname === "/florida") {
+            router.push("/florida/home");
+          } else {
+            router.push("/chicago/home");
+          }
         });
 
         reset();
@@ -129,6 +141,8 @@ export default function SurveyForm() {
       }
     } catch (err) {
       console.error(err);
+    } finally {
+      setDisableButton(false);
     }
   };
 
@@ -164,7 +178,7 @@ export default function SurveyForm() {
               {current > 0 && (
                 <Button
                   onClick={prev}
-                  className={`w-full sm:w-fit cursor-pointer flex items-center justify-center font-normal! bg-white! py-2! px-4! h-12! outline-0! rounded! text-lg! text-Primary-Color! border-Primary-Color!`}
+                  className={`w-full sm:w-fit cursor-pointer flex items-center justify-center font-normal! bg-white! py-2! px-2! sm:px-4! h-12! outline-0! rounded! text-base! sm:text-lg! text-Primary-Color! border-Primary-Color!`}
                 >
                   <ArrowLeft />
                   <span>Previous </span>
@@ -175,16 +189,21 @@ export default function SurveyForm() {
                   <div></div>
                   <button
                     onClick={next}
-                    className={`w-full sm:w-fit cursor-pointer flex items-center justify-center font-normal! bg-Primary-Color! py-2! px-4! h-12! outline-0! border-0! rounded! text-lg! text-white!`}
+                    className={`w-full sm:w-fit cursor-pointer flex items-center justify-center font-normal! bg-Primary-Color! py-2! px-2! sm:px-4! h-12! outline-0! border-0! rounded! text-base! sm:text-lg! text-white!`}
                   >
-                    <span>Next</span>
+                    <span>Get My Lease Quote</span>
                     <ArrowRight />
                   </button>
                 </>
               ) : (
                 <button
                   type="submit"
-                  className={`cursor-pointer w-full sm:w-fit font-normal! bg-Primary-Color! py-2! px-4! h-12! outline-0! border-0! rounded! text-lg! text-white!`}
+                  disabled={disableButton}
+                  className={` ${
+                    disableButton
+                      ? "opacity-50 cursor-not-allowed"
+                      : "cursor-pointer"
+                  } cursor-pointer w-full sm:w-fit font-normal! bg-Primary-Color! py-2! px-2! sm:px-4! h-12! outline-0! border-0! rounded! text-base! sm:text-lg! text-white!`}
                 >
                   Submit
                 </button>

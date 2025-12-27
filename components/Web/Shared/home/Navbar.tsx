@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import MobileNav from "./MobileNav";
+import Image from "next/image";
 
 export const menuLink = [
   {
@@ -50,10 +51,13 @@ export default function Navbar() {
     >
       <div className="custom-container-2">
         <div className="flex justify-between items-center gap-4">
-          <Link href="/">
-            <img
+          <Link href="https://vipmotors.com/">
+            <Image
               src="/images/logo.svg"
-              className="h-[60px] w-[60px] object-contain"
+              height={60}
+              width={60}
+              loading="eager"
+              className="w-15 h-15 object-contain"
               alt="Logo"
             />
           </Link>

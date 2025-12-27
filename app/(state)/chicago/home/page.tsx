@@ -8,7 +8,7 @@ import Testimonial from "@/components/Web/Florida/Home/Testimonial";
 import Contact from "@/components/Web/Florida/Home/Contact";
 import Call from "@/components/Web/Shared/Call";
 
-export default function FloridaHome() {
+export default function ChicagoHome() {
   return (
     <>
       <Navbar />
