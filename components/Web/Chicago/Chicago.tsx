@@ -92,7 +92,12 @@ export default function Chicago() {
           delay: 3000,
         }}
         loop
-        onSlideChange={(swiper) => setBg(backgrounds[swiper.realIndex])}
+        onSlideChange={(swiper) => {
+          const nextBg = backgrounds[swiper.realIndex];
+          const img = new Image();
+          img.src = nextBg;
+          img.onload = () => setBg(nextBg);
+        }}
         className="bg-swiper"
       >
         {backgrounds.map((_, index) => (
