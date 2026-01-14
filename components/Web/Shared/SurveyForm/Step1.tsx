@@ -17,20 +17,20 @@ export default function Step1() {
 
       <div>
         <p className="mt-6 text-lg font-medium mb-3">
-          What&apos;s the new car make and model you&apos;re looking for?{" "}
+          What&apos;s the new car make you&apos;re looking for?{" "}
           <span className="text-Primary-Color">*</span>
         </p>
 
         <Input
           className="custom-input"
-          placeholder="Enter your car model"
-          {...register("carType", {
-            required: "Car make & model is required",
+          placeholder="Enter your car make"
+          {...register("carMake", {
+            required: "Car make is required",
           })}
         />
 
-        {errors.carType && (
-          <p className="error-msg">{errors.carType.message}</p>
+        {errors.carMake && (
+          <p className="error-msg">{errors.carMake.message}</p>
         )}
       </div>
     </div>

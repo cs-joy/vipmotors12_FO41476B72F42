@@ -1,34 +1,112 @@
 import React from "react";
 import { FormDataType } from "./SurveyForm";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useFormContext } from "react-hook-form";
+import { Input } from "@/components/ui/input";
 
 export default function Step6() {
   const {
+    setValue,
+    watch,
     register,
     formState: { errors },
   } = useFormContext<FormDataType>();
+
+  const selectedState = watch("state");
+
+  const state = [
+    {
+      label: "miami",
+      value: "Miami",
+    },
+    {
+      label: "sunn-isles",
+      value: "Sunny Isles",
+    },
+    {
+      label: "aventura",
+      value: "Aventura",
+    },
+    {
+      label: "brickell",
+      value: "Brickell",
+    },
+    {
+      label: "fort-lauderdale",
+      value: "Fort Lauderdale",
+    },
+    {
+      label: "Other",
+      value: "Other",
+    },
+  ];
+
   return (
-    <div>
-      <div className="flex flex-col gap-4">
-        <div>
+    <div className="flex flex-col gap-4">
+      <div>
+        <Label className="text-base font-medium">
+          Where are you located?<span className="text-Primary-Color">*</span>
+        </Label>
+
+        <div className="mt-3 flex flex-col gap-4">
+          <RadioGroup
+            value={selectedState}
+            onValueChange={(value) => {
+              setValue("state", value, { shouldValidate: true });
+              if (value !== "Other")
+                setValue("otherState", "", { shouldValidate: true });
+            }}
+          >
+            {state.map((item, idx) => (
+              <div key={idx} className="flex items-center space-x-2">
+                <RadioGroupItem
+                  value={item.value}
+                  className="cursor-pointer  data-[state=checked]:border-2 data-[state=checked]:border-Primary-Color custom-accent"
+                  id={item.label}
+                />
+                <Label
+                  htmlFor={item.label}
+                  className="text-base cursor-pointer"
+                >
+                  {item.value}
+                </Label>
+              </div>
+            ))}
+          </RadioGroup>
+        </div>
+
+        {errors.state && <p className="error-msg">{errors.state.message}</p>}
+      </div>
+
+      {/* Hidden State Input */}
+      <input
+        type="hidden"
+        {...register("state", { required: "Select your location" })}
+      />
+
+      {/* Conditional "Other" input */}
+      {selectedState === "Other" && (
+        <div className="mt-4">
           <Label className="text-base font-medium">
-            Enter your Zip Code
-            <span className="text-Primary-Color">*</span>
+            Others<span className="text-Primary-Color">*</span>
           </Label>
           <Input
-            className="mt-3 custom-input"
-            {...register("zipcode", {
-              required: "Zip Code is required",
+            className="custom-input"
+            placeholder="location"
+            {...register("otherState", {
+              validate: (value) =>
+                selectedState !== "Other" ||
+                value.trim().length > 0 ||
+                "Please enter your location",
             })}
           />
 
-          {errors.zipcode && (
-            <p className="error-msg">{errors.zipcode.message}</p>
+          {errors.otherState && (
+            <p className="error-msg">{errors.otherState.message}</p>
           )}
         </div>
-      </div>
+      )}
     </div>
   );
 }

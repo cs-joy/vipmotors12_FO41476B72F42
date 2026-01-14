@@ -12,6 +12,7 @@ import Step3 from "./step3";
 import Step4 from "./step4";
 import Step5 from "./step5";
 import Step6 from "./step6";
+import Step7 from "./step7";
 import { usePathname, useRouter } from "next/navigation";
 
 const steps: {
@@ -19,22 +20,23 @@ const steps: {
   Component: FC;
   fields: (keyof FormDataType)[];
 }[] = [
-  { title: "Step 1", Component: Step1, fields: ["carType"] },
-  { title: "Step 2", Component: Step2, fields: ["budget", "budgetOther"] },
-  { title: "Step 3", Component: Step3, fields: ["creditRange"] },
-  {
-    title: "Step 4",
-    Component: Step4,
-    fields: ["fullName", "email", "phoneNumber"],
-  },
-  { title: "Step 5", Component: Step5, fields: ["state", "otherState"] },
-  { title: "Step 6", Component: Step6, fields: ["zipcode"] },
-];
+    { title: "Step 1", Component: Step1, fields: ["carMake"] },
+    { title: "Step 2", Component: Step2, fields: ["carModel"] },
+    { title: "Step 3", Component: Step3, fields: ["budget"] },
+    { title: "Step 4", Component: Step4, fields: ["creditRange"] },
+    {
+      title: "Step 5",
+      Component: Step5,
+      fields: ["fullName", "email", "phoneNumber"],
+    },
+    { title: "Step 6", Component: Step6, fields: ["state", "otherState"] },
+    { title: "Step 7", Component: Step7, fields: ["zipcode"] },
+  ];
 
 export type FormDataType = {
-  carType: string;
+  carMake: string;
+  carModel: string;
   budget: string;
-  budgetOther: string;
   creditRange: string;
   fullName: string;
   email: string;
@@ -51,9 +53,9 @@ export default function SurveyForm() {
 
   const methods = useForm<FormDataType>({
     defaultValues: {
-      carType: "",
+      carMake: "",
+      carModel: "",
       budget: "",
-      budgetOther: "",
       creditRange: "",
       fullName: "",
       email: "",
@@ -93,16 +95,16 @@ export default function SurveyForm() {
           phone: data.phoneNumber,
           location: data.state === "Other" ? data.otherState : data.state,
           "zip-code": data.zipcode,
-          "budget-range":
-            data.budget === "Other" ? data.budgetOther : data.budget,
+          "budget-range": data.budget,
           "credit-score-range": data.creditRange,
         },
         vehicle: {
-          name: data.carType,
+          name: data.carMake,
+          model: data.carModel,
         },
       };
 
-      // console.log("Formatted data:", formattedData);
+      console.log("Formatted data:", formattedData);
 
       const response = await fetch(
         "https://services.leadconnectorhq.com/hooks/N5ckr1LzkF1akGRPJvlC/webhook-trigger/702a517b-6808-481e-8179-3bc64a02d38e",
@@ -191,7 +193,7 @@ export default function SurveyForm() {
                     onClick={next}
                     className={`w-full sm:w-fit cursor-pointer flex items-center justify-center font-normal! bg-Primary-Color! py-2! px-2! sm:px-4! h-12! outline-0! border-0! rounded! text-base! sm:text-lg! text-white!`}
                   >
-                    <span>Get My Lease Quote</span>
+                    <span>Get Approved in Minutes</span>
                     <ArrowRight />
                   </button>
                 </>
@@ -199,13 +201,12 @@ export default function SurveyForm() {
                 <button
                   type="submit"
                   disabled={disableButton}
-                  className={` ${
-                    disableButton
-                      ? "opacity-50 cursor-not-allowed"
-                      : "cursor-pointer"
-                  } cursor-pointer w-full sm:w-fit font-normal! bg-Primary-Color! py-2! px-2! sm:px-4! h-12! outline-0! border-0! rounded! text-base! sm:text-lg! text-white!`}
+                  className={` ${disableButton
+                    ? "opacity-50 cursor-not-allowed"
+                    : "cursor-pointer"
+                    } cursor-pointer w-full sm:w-fit font-normal! bg-Primary-Color! py-2! px-2! sm:px-4! h-12! outline-0! border-0! rounded! text-base! sm:text-lg! text-white!`}
                 >
-                  Submit
+                  Get Approved in Minutes
                 </button>
               )}
             </div>
