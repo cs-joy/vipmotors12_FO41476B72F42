@@ -1,3 +1,5 @@
+/** @format */
+
 import React from "react";
 import { FormDataType } from "./SurveyForm";
 import { Input } from "@/components/ui/input";
@@ -11,60 +13,59 @@ export default function Step5() {
   } = useFormContext<FormDataType>();
   return (
     <div>
-      <p className="mt-6 text-lg font-medium mb-3">
+      <p className='mt-6 text-lg font-medium mb-3'>
         Please share your contact details so our manager can personally reach
         out to you.
       </p>
 
-      <div className="flex flex-col gap-4">
+      <div className='flex flex-col gap-4'>
         <div>
-          <Label className="text-base font-medium">
-            Full Name <span className="text-Primary-Color">*</span>
+          <Label className='text-base font-medium'>
+            Full Name <span className='text-Primary-Color'>*</span>
           </Label>
           <Input
-            className="mt-3 custom-input"
-            placeholder="Enter your name"
+            className='mt-3 custom-input'
+            placeholder='Enter your name'
             {...register("fullName", {
               required: "Full name is required",
             })}
           />
 
           {errors.fullName && (
-            <p className="error-msg">{errors.fullName.message}</p>
+            <p className='error-msg'>{errors.fullName.message}</p>
           )}
         </div>
 
         <div>
-          <Label className="text-base font-medium">
-            Email Address <span className="text-Primary-Color">*</span>
+          <Label className='text-base font-medium'>
+            Email Address <span className=''>(optional)</span>
           </Label>
           <Input
-            className="mt-3 custom-input"
-            placeholder="Enter your email"
+            className='mt-3 custom-input'
+            placeholder='Enter your email (optional)'
             {...register("email", {
-              required: "Email is required",
               pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // basic email regex
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                 message: "Please enter a valid email address",
               },
             })}
           />
-          {errors.email && <p className="error-msg">{errors.email.message}</p>}
+          {/* {errors.email && <p className="error-msg">{errors.email.message}</p>} */}
         </div>
 
         <div>
-          <Label className="text-base font-medium">
-            Phone Number <span className="text-Primary-Color">*</span>
+          <Label className='text-base font-medium'>
+            Phone Number <span className='text-Primary-Color'>*</span>
           </Label>
           <Input
-            className="mt-3 custom-input"
-            placeholder="Enter your number"
+            className='mt-3 custom-input'
+            placeholder='Enter your number'
             {...register("phoneNumber", {
               required: "Phone number is required",
             })}
           />
           {errors.phoneNumber && (
-            <p className="error-msg">{errors.phoneNumber.message}</p>
+            <p className='error-msg'>{errors.phoneNumber.message}</p>
           )}
         </div>
       </div>

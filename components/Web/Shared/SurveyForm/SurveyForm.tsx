@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 import { Button } from "antd";
 import React, { useState } from "react";
@@ -20,18 +22,18 @@ const steps: {
   Component: FC;
   fields: (keyof FormDataType)[];
 }[] = [
-    { title: "Step 1", Component: Step1, fields: ["carMake"] },
-    { title: "Step 2", Component: Step2, fields: ["carModel"] },
-    { title: "Step 3", Component: Step3, fields: ["budget"] },
-    { title: "Step 4", Component: Step4, fields: ["creditRange"] },
-    {
-      title: "Step 5",
-      Component: Step5,
-      fields: ["fullName", "email", "phoneNumber"],
-    },
-    { title: "Step 6", Component: Step6, fields: ["state", "otherState"] },
-    { title: "Step 7", Component: Step7, fields: ["zipcode"] },
-  ];
+  { title: "Step 1", Component: Step1, fields: ["carMake"] },
+  { title: "Step 2", Component: Step2, fields: ["carModel"] },
+  { title: "Step 3", Component: Step3, fields: ["budget"] },
+  { title: "Step 4", Component: Step4, fields: ["creditRange"] },
+  { title: "Step 6", Component: Step6, fields: ["state", "otherState"] },
+  { title: "Step 7", Component: Step7, fields: ["zipcode"] },
+  {
+    title: "Step 5",
+    Component: Step5,
+    fields: ["fullName", "email", "phoneNumber"],
+  },
+];
 
 export type FormDataType = {
   carMake: string;
@@ -65,6 +67,7 @@ export default function SurveyForm() {
       zipcode: "",
     },
     mode: "onTouched",
+    shouldUnregister: true,
   });
 
   const { handleSubmit, trigger, reset } = methods;
@@ -124,10 +127,10 @@ export default function SurveyForm() {
           icon: "success",
           confirmButtonText: "Ok",
         }).then(() => {
-          if (pathname === "/florida") {
-            router.push("/florida/home");
+          if (pathname === "florida/thank-you") {
+            router.push("florida/thank-you");
           } else {
-            router.push("/chicago/home");
+            router.push("florida/thank-you");
           }
         });
 
@@ -156,13 +159,12 @@ export default function SurveyForm() {
           if (e.key === "Enter" && current < steps.length - 1) {
             e.preventDefault();
           }
-        }}
-      >
-        <div className="flex justify-end">
-          <div className="bg-white max-w-[585px] w-full rounded overflow-hidden pb-6">
+        }}>
+        <div className='flex justify-end'>
+          <div className='bg-white max-w-[585px] w-full rounded overflow-hidden pb-6'>
             {/* Headline */}
-            <div className="rounded rounded-bl-none rounded-br-none bg-Primary-Color text-center py-3 px-6">
-              <h1 className="text-white text-base md:text-[24px] font-medium">
+            <div className='rounded rounded-bl-none rounded-br-none bg-Primary-Color text-center py-3 px-6'>
+              <h1 className='text-white text-base md:text-[24px] font-medium'>
                 Tell Us About Your Ideal Car
               </h1>
             </div>
@@ -170,18 +172,17 @@ export default function SurveyForm() {
             {/* Step */}
             {/* <div className="p-6">{steps[current].content}</div> */}
 
-            <div className="p-6">
+            <div className='p-6'>
               {/* <ActiveStep formData={formData} setFormData={setFormData} /> */}
               <ActiveStep />
             </div>
 
             {/* Next/Prev Button */}
-            <div className="px-6 flex flex-wrap gap-4 justify-between">
+            <div className='px-6 flex flex-wrap gap-4 justify-between'>
               {current > 0 && (
                 <Button
                   onClick={prev}
-                  className={`w-full sm:w-fit cursor-pointer flex items-center justify-center font-normal! bg-white! py-2! px-2! sm:px-4! h-12! outline-0! rounded! text-base! sm:text-lg! text-Primary-Color! border-Primary-Color!`}
-                >
+                  className={`w-full sm:w-fit cursor-pointer flex items-center justify-center font-normal! bg-white! py-2! px-2! sm:px-4! h-12! outline-0! rounded! text-base! sm:text-lg! text-Primary-Color! border-Primary-Color!`}>
                   <ArrowLeft />
                   <span>Previous </span>
                 </Button>
@@ -191,21 +192,20 @@ export default function SurveyForm() {
                   <div></div>
                   <button
                     onClick={next}
-                    className={`w-full sm:w-fit cursor-pointer flex items-center justify-center font-normal! bg-Primary-Color! py-2! px-2! sm:px-4! h-12! outline-0! border-0! rounded! text-base! sm:text-lg! text-white!`}
-                  >
+                    className={`w-full sm:w-fit cursor-pointer flex items-center justify-center font-normal! bg-Primary-Color! py-2! px-2! sm:px-4! h-12! outline-0! border-0! rounded! text-base! sm:text-lg! text-white!`}>
                     <span>Get Approved in Minutes</span>
                     <ArrowRight />
                   </button>
                 </>
               ) : (
                 <button
-                  type="submit"
+                  type='submit'
                   disabled={disableButton}
-                  className={` ${disableButton
-                    ? "opacity-50 cursor-not-allowed"
-                    : "cursor-pointer"
-                    } cursor-pointer w-full sm:w-fit font-normal! bg-Primary-Color! py-2! px-2! sm:px-4! h-12! outline-0! border-0! rounded! text-base! sm:text-lg! text-white!`}
-                >
+                  className={` ${
+                    disableButton
+                      ? "opacity-50 cursor-not-allowed"
+                      : "cursor-pointer"
+                  } cursor-pointer w-full sm:w-fit font-normal! bg-Primary-Color! py-2! px-2! sm:px-4! h-12! outline-0! border-0! rounded! text-base! sm:text-lg! text-white!`}>
                   Get Approved in Minutes
                 </button>
               )}

@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 
 import React, { useState } from "react";
@@ -14,6 +16,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import Footer from "../Shared/Footer";
+import { GoDotFill } from "react-icons/go";
 
 const backgrounds = ["/images/home-bg.png", "/images/home-bg-2.png"];
 
@@ -30,45 +33,44 @@ export default function Florida() {
 
   return (
     <section
-      className="min-h-screen bg-cover bg-center"
+      className='min-h-screen bg-cover bg-center'
       style={{
         backgroundImage: `url('/images/home-bg.png')`,
-      }}
-    >
-      <div className="custom-container min-h-screen flex flex-col gap-16 justify-between pt-12 pb-30 sm:pb-8">
+      }}>
+      <div className='custom-container min-h-screen flex flex-col gap-16 justify-between pt-9 lg:pt-12 pb-30 sm:pb-8'>
         {/* Heading */}
-        <div className="flex flex-col gap-4 text-center max-w-[850px] w-full mx-auto">
-          <h1 className="text-[38px] leading-[130%] md:text-[42px] md:leading-normal font-semibold text-white">
+        <div className='flex flex-col gap-4 text-center max-w-[850px] w-full mx-auto'>
+          <h1 className='text-[25px] leading-[130%] md:text-[40px] md:leading-normal font-semibold text-white'>
             Drive Your Dream{" "}
-            <span className="text-Primary-Color">Luxury SUV</span> Today – Fast
+            <span className='text-Primary-Color'>Luxury SUV</span> Today – Fast
             & Easy Auto Leasing in{" "}
-            <span className="text-Primary-Color">Florida</span>
+            <span className='text-Primary-Color'>Florida</span>
           </h1>
 
-          <div className="flex flex-wrap justify-center md:justify-between items-center gap-2">
-            <p className="flex items-center gap-2">
-              <Sparkle />
-              <span className="text-base text-White-Gray-Color">
+          <div className='flex flex-wrap justify-center md:justify-between items-center gap-2'>
+            <p className='flex items-center gap-2'>
+              <GoDotFill className='text-Primary-Color w-6 h-6' />
+              <span className='text-base text-White-Gray-Color'>
                 Brand-new vehicles
               </span>
             </p>
 
-            <p className="flex items-center gap-2">
-              <Sparkle />
-              <span className="text-base text-White-Gray-Color">
+            <p className='flex items-center gap-2'>
+              <GoDotFill className='text-Primary-Color w-6 h-6' />
+              <span className='text-base text-White-Gray-Color'>
                 Delivered anywhere in Florida
               </span>
             </p>
 
-            <p className="flex items-center gap-2">
-              <Sparkle />
-              <span className="text-base text-White-Gray-Color">
+            <p className='flex items-center gap-2'>
+              <GoDotFill className='text-Primary-Color w-6 h-6' />
+              <span className='text-base text-White-Gray-Color'>
                 No dealership visits required.
               </span>
             </p>
           </div>
 
-          <p className="text-base text-White-Gray-Color w-[96%] mx-auto ">
+          <p className='text-base text-White-Gray-Color w-[96%] mx-auto '>
             Serving Miami, Fort Lauderdale, Tampa, Orlando, and West Palm —
             delivery anywhere in Florida.
           </p>
