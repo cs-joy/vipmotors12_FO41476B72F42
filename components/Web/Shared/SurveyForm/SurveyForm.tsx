@@ -2,7 +2,7 @@
 
 "use client";
 import { Button } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FC } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -88,6 +88,11 @@ export default function SurveyForm() {
   // Form Submission
   const onSubmit = async (data: FormDataType) => {
     setDisableButton(true);
+    const from = pathname.includes("florida")
+      ? "florida"
+      : pathname.includes("chicago")
+      ? "chicago"
+      : "florida";
     try {
       // console.log("Submitting:", data);
 
@@ -117,39 +122,48 @@ export default function SurveyForm() {
           body: JSON.stringify(formattedData),
         }
       );
-
-      const result = await response.json();
-
-      if (response.ok) {
-        Swal.fire({
-          title: "Success!",
-          text: "Thank you for taking the time to complete our survey!",
-          icon: "success",
-          confirmButtonText: "Ok",
-        }).then(() => {
-          if (pathname === "florida/thank-you") {
-            router.push("florida/thank-you");
-          } else {
-            router.push("florida/thank-you");
-          }
-        });
-
-        reset();
-        setCurrent(0);
-      } else {
-        Swal.fire({
-          title: "Error!",
-          text: result.message || "Something went wrong. Please try again.",
-          icon: "error",
-          confirmButtonText: "Ok",
-        });
+      if (!response.ok) {
+        throw new Error("Submission failed");
       }
-    } catch (err) {
-      console.error(err);
+
+      // ✅ SUCCESS → thank you page
+      router.push(`/thank-you?from=${from}`);
+
+      reset();
+      setCurrent(0);
+    } catch (error) {
+      console.error("Form submission error:", error);
     } finally {
       setDisableButton(false);
     }
   };
+
+  // const result = await response.json();
+
+  // if (response.ok) {
+  //   Swal.fire({
+  //     title: "Success!",
+  //     text: "Thank you for taking the time to complete our survey!",
+  //     icon: "success",
+  //     confirmButtonText: "Ok",
+  //   }).then(() => {
+  //     if (pathname === "florida/thank-you") {
+  //       router.push("florida/thank-you");
+  //     } else {
+  //       router.push("florida/thank-you");
+  //     }
+  //   });
+
+  //   reset();
+  //   setCurrent(0);
+  // } else {
+  //   Swal.fire({
+  //     title: "Error!",
+  //     text: result.message || "Something went wrong. Please try again.",
+  //     icon: "error",
+  //     confirmButtonText: "Ok",
+  //   });
+  // }
 
   return (
     <FormProvider {...methods}>
@@ -161,7 +175,7 @@ export default function SurveyForm() {
           }
         }}>
         <div className='flex justify-end'>
-          <div className='bg-white max-w-[585px] w-full rounded overflow-hidden pb-6'>
+          <div className='bg-white max-w-[585px] w-full rounded overflow-hidden pb-6 -mt-7'>
             {/* Headline */}
             <div className='rounded rounded-bl-none rounded-br-none bg-Primary-Color text-center py-3 px-6'>
               <h1 className='text-white text-base md:text-[24px] font-medium'>
