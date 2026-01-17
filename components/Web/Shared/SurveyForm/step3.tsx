@@ -1,3 +1,5 @@
+/** @format */
+
 import React from "react";
 
 import {
@@ -24,45 +26,45 @@ export default function Step3() {
 
   return (
     <div>
-      <p className="mt-6 text-lg font-medium mb-3">
+      <p className='mt-6 text-lg font-medium mb-3'>
         What is your estimated budget range?
-        <span className="text-Primary-Color">*</span>
+        <span className='text-Primary-Color'>*</span>
       </p>
 
       <Select
         value={selectedBudget}
         onValueChange={(value) => {
           setValue("budget", value, { shouldValidate: true });
-          {/*}
+          {
+            /*}
           if (value !== "Other")
             setValue("budgetOther", "", { shouldValidate: true });
-          */}
-        }}
-      >
-        <SelectTrigger className="w-full custom-input cursor-pointer">
-          <SelectValue placeholder="Select your range" />
+          */
+          }
+        }}>
+        <SelectTrigger className='w-full custom-input cursor-pointer'>
+          <SelectValue placeholder='Select your range' />
         </SelectTrigger>
 
-        <SelectContent position="popper">
-          <SelectItem value="$300-$400">$300-$400</SelectItem>
-          <SelectItem value="$400-$500">$400-$500</SelectItem>
-          <SelectItem value="$500-$600">$500-$600</SelectItem>
-          <SelectItem value="$600-$700">$600-$700</SelectItem>
-          <SelectItem value="$700-$800">$700-$800</SelectItem>
-          <SelectItem value="$800-$900">$800-$900</SelectItem>
-          <SelectItem value="$900-$1000">$900-$1000</SelectItem>
-          <SelectItem value="$1000+">$1000+</SelectItem>
+        <SelectContent position='popper'>
+          <SelectItem value='$300-$400'>$300-$400</SelectItem>
+          <SelectItem value='$400-$500'>$400-$500</SelectItem>
+          <SelectItem value='$500-$600'>$500-$600</SelectItem>
+          <SelectItem value='$600-$700'>$600-$700</SelectItem>
+          <SelectItem value='$700-$800'>$700-$800</SelectItem>
+          <SelectItem value='$800-$900'>$800-$900</SelectItem>
+          <SelectItem value='$900-$1000'>$900-$1000</SelectItem>
+          <SelectItem value='$1000+'>$1000+</SelectItem>
         </SelectContent>
       </Select>
 
-      {errors.budget && <p className="error-msg">{errors.budget.message}</p>}
+      {errors.budget && <p className='error-msg'>{errors.budget.message}</p>}
 
       {/* Hidden Budget Input */}
       <input
-        type="hidden"
+        type='hidden'
         {...register("budget", { required: "Budget range is required" })}
       />
-
 
       {/* Conditional "Other" input */}
       {/*
