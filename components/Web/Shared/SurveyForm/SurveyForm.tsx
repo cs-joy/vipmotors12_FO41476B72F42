@@ -12,9 +12,10 @@ import Step1 from "./Step1";
 import Step2 from "./step2";
 import Step3 from "./step3";
 import Step4 from "./step4";
-import Step5 from "./step5";
 import Step6 from "./step6";
 import Step7 from "./step7";
+import Step5 from "./step5";
+
 import { usePathname, useRouter } from "next/navigation";
 
 const steps: {
@@ -67,7 +68,7 @@ export default function SurveyForm() {
       zipcode: "",
     },
     mode: "onTouched",
-    shouldUnregister: true,
+    shouldUnregister: false,
   });
 
   const { handleSubmit, trigger, reset } = methods;
@@ -88,13 +89,12 @@ export default function SurveyForm() {
   // Form Submission
   const onSubmit = async (data: FormDataType) => {
     setDisableButton(true);
-    const from = pathname.includes("florida")
-      ? "florida"
-      : pathname.includes("chicago")
-      ? "chicago"
+    const from =
+      pathname.includes("florida") ? "florida"
+      : pathname.includes("chicago") ? "chicago"
       : "florida";
     try {
-      // console.log("Submitting:", data);
+      console.log("Submitting:", data);
 
       const formattedData = {
         contact: {
@@ -120,7 +120,7 @@ export default function SurveyForm() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formattedData),
-        }
+        },
       );
       if (!response.ok) {
         throw new Error("Submission failed");
@@ -201,7 +201,7 @@ export default function SurveyForm() {
                   <span>Previous </span>
                 </Button>
               )}
-              {current < steps.length - 1 ? (
+              {current < steps.length - 1 ?
                 <>
                   <div></div>
                   <button
@@ -211,18 +211,17 @@ export default function SurveyForm() {
                     <ArrowRight />
                   </button>
                 </>
-              ) : (
-                <button
+              : <button
                   type='submit'
                   disabled={disableButton}
                   className={` ${
-                    disableButton
-                      ? "opacity-50 cursor-not-allowed"
-                      : "cursor-pointer"
+                    disableButton ?
+                      "opacity-50 cursor-not-allowed"
+                    : "cursor-pointer"
                   } cursor-pointer w-full sm:w-fit font-normal! bg-Primary-Color! py-2! px-2! sm:px-4! h-12! outline-0! border-0! rounded! text-base! sm:text-lg! text-white!`}>
                   Get Approved in Minutes
                 </button>
-              )}
+              }
             </div>
           </div>
         </div>
