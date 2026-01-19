@@ -1,3 +1,5 @@
+/** @format */
+
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { FormDataType } from "./SurveyForm";
@@ -10,27 +12,27 @@ export default function Step1() {
   } = useFormContext<FormDataType>();
   return (
     <div>
-      <p className="text-base md:text-lg font-medium">
+      <p className='text-base md:text-lg font-medium'>
         Hello, Please fill out the following form, so we can answer all your
         questions :
       </p>
 
       <div>
-        <p className="mt-6 text-lg font-medium mb-3">
+        <p className='mt-4 lg:mt-6 text-sm lg:text-lg font-normal lg:font-medium mb-3'>
           What&apos;s the new car make you&apos;re looking for?{" "}
-          <span className="text-Primary-Color">*</span>
+          <span className='text-Primary-Color'>*</span>
         </p>
 
         <Input
-          className="custom-input"
-          placeholder="Enter your car make"
+          className='custom-input '
+          placeholder='Enter your car make'
           {...register("carMake", {
             required: "Car make is required",
           })}
         />
 
         {errors.carMake && (
-          <p className="error-msg">{errors.carMake.message}</p>
+          <p className='error-msg text-sm'>{errors.carMake.message}</p>
         )}
       </div>
     </div>

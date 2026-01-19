@@ -26,7 +26,7 @@ export default function Step3() {
 
   return (
     <div>
-      <p className='mt-6 text-lg font-medium mb-3'>
+      <p className='mt-4 lg:mt-6 text-[15px] lg:text-lg font-normal lg:font-medium mb-3'>
         What is your estimated budget range?
         <span className='text-Primary-Color'>*</span>
       </p>

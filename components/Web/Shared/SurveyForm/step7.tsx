@@ -1,3 +1,5 @@
+/** @format */
+
 import React from "react";
 import { FormDataType } from "./SurveyForm";
 import { Input } from "@/components/ui/input";
@@ -11,21 +13,21 @@ export default function Step7() {
   } = useFormContext<FormDataType>();
   return (
     <div>
-      <div className="flex flex-col gap-4">
+      <div className='flex flex-col gap-4'>
         <div>
-          <Label className="text-base font-medium">
+          <Label className='text-base lg:text-lg  font-normal lg:font-medium'>
             Enter your Zip Code
-            <span className="text-Primary-Color">*</span>
+            <span className='text-Primary-Color'>*</span>
           </Label>
           <Input
-            className="mt-3 custom-input"
+            className='mt-3 custom-input'
             {...register("zipcode", {
               required: "Zip Code is required",
             })}
           />
 
           {errors.zipcode && (
-            <p className="error-msg">{errors.zipcode.message}</p>
+            <p className='error-msg'>{errors.zipcode.message}</p>
           )}
         </div>
       </div>

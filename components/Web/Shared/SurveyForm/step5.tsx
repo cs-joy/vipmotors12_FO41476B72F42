@@ -13,14 +13,14 @@ export default function Step5() {
   } = useFormContext<FormDataType>();
   return (
     <div>
-      <p className='mt-6 text-lg font-medium mb-3'>
+      <p className='mt-4 lg:mt-6 text-base lg:text-lg  font-normal lg:font-medium mb-3'>
         Please share your contact details so our manager can personally reach
         out to you.
       </p>
 
       <div className='flex flex-col gap-4'>
         <div>
-          <Label className='text-base font-medium'>
+          <Label className='text-base lg:text-lg  font-normal lg:font-medium'>
             Full Name <span className='text-Primary-Color'>*</span>
           </Label>
           <Input
@@ -37,7 +37,7 @@ export default function Step5() {
         </div>
 
         <div>
-          <Label className='text-base font-medium'>
+          <Label className='text-base lg:text-lg  font-normal lg:font-medium'>
             Email Address <span className=''>(optional)</span>
           </Label>
           <Input
@@ -54,7 +54,7 @@ export default function Step5() {
         </div>
 
         <div>
-          <Label className='text-base font-medium'>
+          <Label className='text-base lg:text-lg  font-normal lg:font-medium'>
             Phone Number <span className='text-Primary-Color'>*</span>
           </Label>
           <Input

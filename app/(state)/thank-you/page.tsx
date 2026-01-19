@@ -51,7 +51,7 @@ export default function ThankYou() {
           <div className='bg-Primary-Color rounded-lg inline-block'>
             <button
               onClick={handleRedirect}
-              className='text-[#FFF] text-lg font-normal py-3 px-6'>
+              className='text-[#FFF] text-lg font-normal py-3 px-6 cursor-pointer'>
               Visit Our Landing Page
             </button>
           </div>

@@ -26,7 +26,7 @@ export default function Step4() {
   return (
     <div>
       {/* Credit Score */}
-      <p className='mt-6 text-lg font-medium mb-3'>
+      <p className='mt-4 lg:mt-6 text-base lg:text-lg  font-normal lg:font-medium mb-3'>
         What is your approximate credit score range?{" "}
         <span className='text-Primary-Color'>*</span>
       </p>
@@ -45,7 +45,7 @@ export default function Step4() {
       )}
 
       {/* Budget */}
-      <p className='mt-6 text-lg font-medium mb-3'>
+      <p className='mt-6 text-[15px] lg:text-lg  font-normal lg:font-medium mb-3'>
         What is your estimated budget range?
         <span className='text-Primary-Color'>*</span>
       </p>
