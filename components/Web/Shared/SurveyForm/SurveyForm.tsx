@@ -22,24 +22,29 @@ const steps: {
   Component: FC;
   fields: (keyof FormDataType)[];
 }[] = [
-  { title: "Step 1", Component: Step1, fields: ["carMake"] },
-  { title: "Step 2", Component: Step2, fields: ["carModel"] },
-  { title: "Step 3", Component: Step3, fields: ["budget"] },
-  { title: "Step 4", Component: Step4, fields: ["creditRange"] },
-  { title: "Step 6", Component: Step6, fields: ["state", "otherState"] },
-  { title: "Step 7", Component: Step7, fields: ["zipcode"] },
-  {
-    title: "Step 5",
-    Component: Step5,
-    fields: ["fullName", "email", "phoneNumber"],
-  },
-];
+    { title: "Step 1", Component: Step1, fields: ["carMake"] },
+    { title: "Step 2", Component: Step2, fields: ["carModel"] },
+    { title: "Step 3", Component: Step3, fields: ["budgetRange"] },
+    {
+      title: "Step 4",
+      Component: Step4,
+      fields: ["creditRange", "timeFrame"]
+    },
+    { title: "Step 6", Component: Step6, fields: ["state", "otherState"] },
+    { title: "Step 7", Component: Step7, fields: ["zipcode"] },
+    {
+      title: "Step 5",
+      Component: Step5,
+      fields: ["fullName", "email", "phoneNumber"],
+    },
+  ];
 
 export type FormDataType = {
   carMake: string;
   carModel: string;
-  budget: string;
+  budgetRange: string;
   creditRange: string;
+  timeFrame: string;
   fullName: string;
   email: string;
   phoneNumber: string;
@@ -57,8 +62,9 @@ export default function SurveyForm() {
     defaultValues: {
       carMake: "",
       carModel: "",
-      budget: "",
+      budgetRange: "",
       creditRange: "",
+      timeFrame: "",
       fullName: "",
       email: "",
       phoneNumber: "",
@@ -91,8 +97,8 @@ export default function SurveyForm() {
     const from = pathname.includes("florida")
       ? "florida"
       : pathname.includes("chicago")
-      ? "chicago"
-      : "florida";
+        ? "chicago"
+        : "florida";
     try {
       // console.log("Submitting:", data);
 
@@ -102,13 +108,14 @@ export default function SurveyForm() {
           email: data.email,
           phone: data.phoneNumber,
           location: data.state === "Other" ? data.otherState : data.state,
-          "zip-code": data.zipcode,
-          "budget-range": data.budget,
-          "credit-score-range": data.creditRange,
+          zip_code: data.zipcode,
+          credit_score_range: data.creditRange,
         },
         vehicle: {
           name: data.carMake,
           model: data.carModel,
+          budget_range: data.budgetRange,
+          timeframe: data.timeFrame,
         },
       };
 
@@ -215,11 +222,10 @@ export default function SurveyForm() {
                 <button
                   type='submit'
                   disabled={disableButton}
-                  className={` ${
-                    disableButton
-                      ? "opacity-50 cursor-not-allowed"
-                      : "cursor-pointer"
-                  } cursor-pointer w-full sm:w-fit font-normal! bg-Primary-Color! py-2! px-2! sm:px-4! h-12! outline-0! border-0! rounded! text-base! sm:text-lg! text-white!`}>
+                  className={` ${disableButton
+                    ? "opacity-50 cursor-not-allowed"
+                    : "cursor-pointer"
+                    } cursor-pointer w-full sm:w-fit font-normal! bg-Primary-Color! py-2! px-2! sm:px-4! h-12! outline-0! border-0! rounded! text-base! sm:text-lg! text-white!`}>
                   Get Approved in Minutes
                 </button>
               )}
