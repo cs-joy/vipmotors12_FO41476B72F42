@@ -21,7 +21,7 @@ export default function Step4() {
     formState: { errors },
   } = useFormContext<FormDataType>();
 
-  const selectedBudget = watch("budget");
+  const selectedBudget = watch("budgetRange");
 
   return (
     <div>
@@ -44,32 +44,32 @@ export default function Step4() {
         <p className='error-msg'>{errors.creditRange.message}</p>
       )}
 
-      {/* Budget */}
-      <p className='mt-6 text-[15px] lg:text-lg  font-normal lg:font-medium mb-3'>
-        What is your estimated budget range?
+      {/* Timeframe */}
+      <p className='mt-6 text-lg font-medium mb-3'>
+        When are you planning to purchase your next vehicle?
         <span className='text-Primary-Color'>*</span>
       </p>
 
       <Controller
-        name='budget'
+        name='timeFrame'
         control={control}
-        rules={{ required: "Budget range is required" }}
+        rules={{ required: "Timeframe is required" }}
         render={({ field }) => (
           <Select value={field.value} onValueChange={field.onChange}>
             <SelectTrigger className='w-full custom-input cursor-pointer'>
-              <SelectValue placeholder='Select your range' />
+              <SelectValue placeholder='Select your timeframe' />
             </SelectTrigger>
 
             <SelectContent position='popper'>
-              <SelectItem value='$300-$400'>ASAP</SelectItem>
-              <SelectItem value='$400-$500'>2 weeks</SelectItem>
-              <SelectItem value='$500-$600'>30 days</SelectItem>
+              <SelectItem value='ASAP'>ASAP</SelectItem>
+              <SelectItem value='2 weeks'>2 weeks</SelectItem>
+              <SelectItem value='30 days'>30 days</SelectItem>
             </SelectContent>
           </Select>
         )}
       />
 
-      {errors.budget && <p className='error-msg'>{errors.budget.message}</p>}
+      {errors.timeFrame && <p className='error-msg'>{errors.timeFrame.message}</p>}
     </div>
   );
 }

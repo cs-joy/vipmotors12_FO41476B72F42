@@ -22,7 +22,7 @@ export default function Step3() {
     formState: { errors },
   } = useFormContext<FormDataType>();
 
-  const selectedBudget = watch("budget");
+  const selectedBudget = watch("budgetRange");
 
   return (
     <div>
@@ -34,7 +34,7 @@ export default function Step3() {
       <Select
         value={selectedBudget}
         onValueChange={(value) => {
-          setValue("budget", value, { shouldValidate: true });
+          setValue("budgetRange", value, { shouldValidate: true });
           {
             /*}
           if (value !== "Other")
@@ -58,12 +58,12 @@ export default function Step3() {
         </SelectContent>
       </Select>
 
-      {errors.budget && <p className='error-msg'>{errors.budget.message}</p>}
+      {errors.budgetRange && <p className='error-msg'>{errors.budgetRange.message}</p>}
 
       {/* Hidden Budget Input */}
       <input
         type='hidden'
-        {...register("budget", { required: "Budget range is required" })}
+        {...register("budgetRange", { required: "Budget range is required" })}
       />
 
       {/* Conditional "Other" input */}
