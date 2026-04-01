@@ -73,7 +73,7 @@ export default function SurveyForm() {
       zipcode: "",
     },
     mode: "onTouched",
-    shouldUnregister: true,
+    shouldUnregister: false,
   });
 
   const { handleSubmit, trigger, reset } = methods;
@@ -103,19 +103,20 @@ export default function SurveyForm() {
       // console.log("Submitting:", data);
 
       const formattedData = {
-        contact: {
+         contact: {
           fullname: data.fullName,
           email: data.email,
           phone: data.phoneNumber,
           location: data.state === "Other" ? data.otherState : data.state,
-          zip_code: data.zipcode,
-          credit_score_range: data.creditRange,
+          "zip-code": data.zipcode,
+          "credit-score-range": data.creditRange,
+          "timeframe": data.timeFrame,
         },
         vehicle: {
           name: data.carMake,
           model: data.carModel,
           budget_range: data.budgetRange,
-          timeframe: data.timeFrame,
+     
         },
       };
 
