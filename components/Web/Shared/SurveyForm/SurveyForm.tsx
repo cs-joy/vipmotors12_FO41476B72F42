@@ -1,4 +1,3 @@
-/** @format */
 
 "use client";
 import { Button } from "antd";
@@ -127,7 +126,7 @@ export default function SurveyForm() {
       }
 
       // ✅ SUCCESS → thank you page
-      router.push(`/thank-you?from=${from}`);
+      // router.push(`/thank-you?from=${from}`);
 
       reset();
       setCurrent(0);
