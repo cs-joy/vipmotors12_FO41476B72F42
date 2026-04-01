@@ -61,9 +61,9 @@ export default function Step4() {
             </SelectTrigger>
 
             <SelectContent position='popper'>
-              <SelectItem value='$300-$400'>ASPA</SelectItem>
-              <SelectItem value='$400-$500'>/2 weeks</SelectItem>
-              <SelectItem value='$500-$600'>/30 days</SelectItem>
+              <SelectItem value='$300-$400'>ASAP</SelectItem>
+              <SelectItem value='$400-$500'>2 weeks</SelectItem>
+              <SelectItem value='$500-$600'>30 days</SelectItem>
             </SelectContent>
           </Select>
         )}
